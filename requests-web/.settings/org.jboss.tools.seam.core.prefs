@@ -1,0 +1,14 @@
+action.package=com.parkhomenko.requests
+action.sources=/requests-ejb/src/main/java
+eclipse.preferences.version=1
+model.package=com.parkhomenko.requests
+model.sources=/requests-ejb/src/main/java
+seam.ejb.project=requests-ejb
+seam.project.connection.profile=MySQL Database
+seam.project.deployment.type=ear
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/requests-web/src/main/webapp
+seam.test.creating=false
+seam.test.project=requests-web
+test.package=org.domain.requestsweb.test
+test.sources=/requests-web/src/main/java
