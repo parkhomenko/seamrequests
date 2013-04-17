@@ -1,0 +1,4 @@
+seamrequests
+============
+
+Sample seam application
