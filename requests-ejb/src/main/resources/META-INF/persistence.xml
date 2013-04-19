@@ -6,18 +6,22 @@
              
    <persistence-unit name="maintenance">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
-      <!-- <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source> -->
+      <jta-data-source>java:jboss/datasources/MySqlDS</jta-data-source>
       <properties>
-	      <!-- <property name="hibernate.ejb.cfgfile" value="/hibernate.cfg.xml"/> -->
+      		<!--
+	      <property name="hibernate.ejb.cfgfile" value="/hibernate.cfg.xml"/>
+	      -->
 	      
+	      <!--
 	      <property name="hibernate.hbm2ddl.auto" value="create"/>
 	      <property name="hibernate.archive.autodetection" value="class, hbm"/>
 	      <property name="hibernate.show_sql" value="true"/>
 	      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
 	      <property name="hibernate.connection.password" value="3n0vKE"/>
-	      <property name="hibernate.connection.url" value="jdbc:mysql://localhost/maintenance"/>
+	      <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/maintenance"/>
 	      <property name="hibernate.connection.username" value="root"/>
-	      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+	      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+	      -->
       </properties>
    </persistence-unit>
    

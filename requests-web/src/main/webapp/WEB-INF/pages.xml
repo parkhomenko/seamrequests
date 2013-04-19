@@ -3,8 +3,23 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://jboss.org/schema/seam/pages http://jboss.org/schema/seam/pages-2.3.xsd">
        
-	<page view-id="/first.xhtml">
-		<!-- <begin-conversation join="true" pageflow="numberGuess"/> -->
-	</page>
+    <!--
+		<page view-id="/first.xhtml">
+			<begin-conversation join="true" pageflow="numberGuess"/>
+		</page>
+	-->
+	
+	<page view-id="/first.xhtml" action="#{identity.login}">
+
+        <navigation from-action="#{identity.login}"> 
+      		<rule if-outcome="true"> 
+         		<redirect view-id="/result.xhtml"/> 
+      		</rule> 
+      		<rule if-outcome="false"> 
+         		<render view-id="/first.xhtml"/> 
+      		</rule> 
+	</navigation>
+        
+    </page>
 	   
 </pages>
