@@ -9,6 +9,16 @@
                  http://jboss.org/schema/seam/transaction http://jboss.org/schema/seam/transaction-2.3.xsd
                  http://jboss.org/schema/seam/security http://jboss.org/schema/seam/security-2.3.xsd
                  http://jboss.org/schema/seam/components http://jboss.org/schema/seam/components-2.3.xsd">
+                 
+    <security:identity authenticate-method="#{authenticator.authenticate}"/>
+    
+    <event type="org.jboss.seam.security.notLoggedIn">
+    	<action execute="#{redirect.captureCurrentView}"/>
+	</event>
+	
+	<event type="org.jboss.seam.security.postAuthenticate">
+	    <action execute="#{redirect.returnToCapturedView}"/>
+	</event>
     
     <core:init jndi-pattern="${jndiPattern}" debug="true" distributable="@distributable@"/>
         
@@ -17,8 +27,6 @@
                   conversation-id-parameter="cid"/>
 
     <transaction:ejb-transaction/>
-
-    <security:identity authenticate-method="#{authenticator.authenticate}"/>    
     
     <component class="org.jboss.seam.transaction.EjbSynchronizations" jndi-name="java:app/jboss-seam/EjbSynchronizations"/>
     <component class="org.jboss.seam.async.TimerServiceDispatcher" jndi-name="java:app/jboss-seam/TimerServiceDispatcher"/>

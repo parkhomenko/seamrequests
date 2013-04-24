@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <diagram model-entity="SeamPagesDiagram">
- <item ID="#first.xhtml" NAME="#xfirst.xhtml" PATH="/first.xhtml"
-  SHAPE="24,17,0,0" TYPE="page" model-entity="SeamPagesDiagramItem">
-  <output ID="/result.xhtml" NAME="output" PATH="/result.xhtml"
-   TARGET="#xresult.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
-  <output ID="/first.xhtml" NAME="output1" PATH="/first.xhtml"
-   TARGET="#xfirst.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
- </item>
- <item NAME="#xresult.xhtml" PATH="/result.xhtml" SHAPE="376,17,0,0"
-  TYPE="page" model-entity="SeamPagesDiagramItem"/>
+ <item ID="#test.xhtml" NAME="#xtest.xhtml" PATH="/test.xhtml"
+  SHAPE="24,353,0,0" TYPE="page" model-entity="SeamPagesDiagramItem"/>
 </diagram>

@@ -1,24 +1,26 @@
 package com.parkhomenko.requests;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.In;
-import org.jboss.seam.annotations.Logger;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.annotations.Out;
-import org.jboss.seam.log.Log;
 
 @Stateless
 @Name("authenticator")
 public class AuthenticatorAction implements Authenticator {
 
-	@In(required=false)   
-    @Out(required=false, scope = ScopeType.SESSION)
+	@In(required=false)
+    @Out(required=false, scope=ScopeType.SESSION)
     private User user;
 	
-	@Logger
-	private Log log;
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	public User getUser() {
 		return user;
@@ -30,8 +32,10 @@ public class AuthenticatorAction implements Authenticator {
 	
 	@Override
 	public boolean authenticate() {
-		log.info("Authenticator", "In authenticate");
-		user.setName("Hi man");
+		Session session = (Session)entityManager.getDelegate();
+		user = (User)session.createCriteria(User.class)
+				.add(Restrictions.eq("name", "John Wayne"))
+				.uniqueResult();
 		return true;
 	}
 }
