@@ -1,29 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:s="http://jboss.org/schema/seam/taglib">
-      
-
   
-  <h:body>
-    
-    <h:form id="login">
-		<div>
-	    	<h:outputLabel for="name" value="Username"/>
-	    	<h:inputText id="name" value="#{credentials.username}"/>
-		</div>
+	<h:body>
 	
-		<div>
-	    	<h:outputLabel for="password" value="Password"/>
-	    	<h:inputSecret id="password" value="#{credentials.password}"/>
-		</div>
+		<ui:composition template="/template/common.xhtml">
+			<ui:define name="content">
+				<h:form id="login">
+					<div>
+		    			<h:outputLabel for="name" value="Username"/>
+		    			<h:inputText id="name" value="#{credentials.username}"/>
+					</div>
+		
+					<div>
+		    			<h:outputLabel for="password" value="Password"/>
+		    			<h:inputSecret id="password" value="#{credentials.password}"/>
+					</div>
+		
+					<div>
+		    			<h:commandButton value="Login" action="#{identity.login}"/>
+					</div>
+				</h:form>
+		  	</ui:define>
+		  		
+		  	<ui:define name="footer">
+		  		<h2>This is page1 Footer</h2>
+		  	</ui:define>
+	  	</ui:composition>
 	
-		<div>
-	    	<h:commandButton value="Login" action="#{identity.login}"/>
-		</div>
-	</h:form>
-
-  </h:body>
+	</h:body>
   
 </html>
