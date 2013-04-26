@@ -6,26 +6,36 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
  
     <h:head>
-		<h:outputStylesheet name="common-style.css" library="css" />
+		<link href="#{facesContext.externalContext.requestContextPath}/site.css" rel="stylesheet" type="text/css" />
     </h:head>
  
     <h:body>
  
-		<div id="page">
+		<div class="page">
 	 
 		    <div id="header">
-				<ui:insert name="header">
-				</ui:insert>
+		    	<div id="logindisplay">
+		    		<h:outputText value="Hello, guest" rendered="#{empty user.name}" />
+		    		<h:outputText value="Hello, #{user.name}" rendered="#{not empty user.name}" />
+            	</div>
 		    </div>
-	 
-		    <div id="content">
+            
+            <div id="menucontainer">
+                <ul id="menu">              
+                    <li><h:outputLink value="home.xhtml">Home</h:outputLink></li>
+                    <li><h:outputLink value="about.xhtml">About</h:outputLink></li>
+                    <li><h:outputLink value="queries.xhtml">Queries</h:outputLink></li>
+                    <li><h:outputLink value="admin.xhtml">Admin</h:outputLink></li>
+                </ul>
+            </div>
+            
+		    <div id="main">
 		  		<ui:insert name="content">
 		   		</ui:insert>
 		    </div>
 	 
 		    <div id="footer">
-	    		<ui:insert name="footer">
-		    	</ui:insert>
+		    	<p>Something goes here...</p>
 	    	</div>
 	 
 	    </div>
