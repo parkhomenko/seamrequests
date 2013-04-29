@@ -34,19 +34,14 @@ public class RequestManagerBean implements RequestManager {
 	
 	@Override
 	@Factory("requestList")
+	@SuppressWarnings("unchecked")
 	public void findRequests() {
 		Session session = (Session)entityManager.getDelegate();
 		requestList = session.createCriteria(Request.class)
 				.addOrder(Order.desc("requestDate"))
 				.list();
 	}
-
-	@Override
-	public void select() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void delete() {
 		requestList.remove(request);
@@ -56,6 +51,5 @@ public class RequestManagerBean implements RequestManager {
 	@Override
 	@Remove
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 }

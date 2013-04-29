@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.persistence.Temporal;
@@ -20,7 +21,8 @@ import org.jboss.seam.annotations.Name;
 
 @Entity
 @Scope(ScopeType.EVENT)
-@Name("request")
+@Name("req")
+@Table(name="requests")
 public class Request implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -50,11 +52,11 @@ public class Request implements Serializable {
 	
 	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id", nullable = false)
+	@JoinColumn(name = "user", nullable = false)
 	private User sender;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id", nullable = false)
+	@JoinColumn(name = "admin")
 	private User admin;
 
 	public Long getId() {

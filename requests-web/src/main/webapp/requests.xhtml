@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:s="http://jboss.org/schema/seam/taglib">
+
+	<h:body>
+		<ui:composition template="/template/common.xhtml">
+			<ui:define name="content">
+	  			<f:view>
+	  				<h:form>
+	  					<h2>Request List</h2>
+	  					<h:outputText value="No requests have been found at this time"
+	  						rendered="#{requestList.rowCount == 0}" />
+	  					<h:dataTable var="rq" value="#{requestList}"
+	  						rendered="#{requestList.rowCount > 0}">
+	  						<h:column>
+	  							<f:facet name="header">
+	  								<h:outputText value="No" />
+	  							</f:facet>
+	  							<h:outputText value="#{rq.rowIndex}" />
+	  						</h:column>
+	  						<h:column>
+	  							<f:facet name="header">
+	  								<h:outputText value="Name" />
+	  							</f:facet>
+	  							<h:outputText value="#{rq.name}" />
+	  						</h:column>
+	  						<h:column>
+	  							<f:facet name="header">
+	  								<h:outputText value="Request date" />
+	  							</f:facet>
+	  							<h:outputText value="#{rq.requestDate}">
+	  								<f:convertDateTime type="both" dateStyle="medium" timeStyle="short" />
+	  							</h:outputText>
+	  						</h:column>
+	  					</h:dataTable>
+	  					<h3><h:outputText value="#{req.name}" /></h3>
+	  					<div><h:outputText value="#{req.description}" /></div>
+	  				</h:form>
+	  			</f:view>
+	  		</ui:define>
+  		</ui:composition>
+  	</h:body>
+  
+</html>
