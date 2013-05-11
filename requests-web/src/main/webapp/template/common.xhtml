@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
  
     <h:head>
-		<link href="#{facesContext.externalContext.requestContextPath}/site.css" rel="stylesheet" type="text/css" />
+    	<h:outputStylesheet library="default" name="css/site.css" />
     </h:head>
  
     <h:body>
@@ -15,17 +15,24 @@
 	 
 		    <div id="header">
 		    	<div id="logindisplay">
-		    		<h:outputText value="Hello, guest" rendered="#{empty user.name}" />
-		    		<h:outputText value="Hello, #{user.name}" rendered="#{not empty user.name}" />
+		    		<h:outputText value="Hello, guest" rendered="#{not identity.loggedIn}" />
+		    		<h:outputText value="Hello, #{user.name}" rendered="#{identity.loggedIn}" />
+		    		<h:form styleClass="sameline" rendered="#{identity.loggedIn}">
+		    			[<h:commandLink value="Logout" action="#{identity.logout}" /> ]
+		    		</h:form>
             	</div>
 		    </div>
             
             <div id="menucontainer">
                 <ul id="menu">              
-                    <li><h:outputLink value="home.xhtml">Home</h:outputLink></li>
-                    <li><h:outputLink value="about.xhtml">About</h:outputLink></li>
+                    <li><h:outputLink value="home.seam">Home</h:outputLink></li>
+                    <li><h:outputLink value="about.seam">About</h:outputLink></li>
                     <li><h:outputLink value="requests.seam">Queries</h:outputLink></li>
-                    <li><h:outputLink value="admin.xhtml">Admin</h:outputLink></li>
+                    <li>
+                    	<h:outputLink value="users.seam" rendered="#{identity.loggedIn and identity.hasRole('admin')}">
+                    		Users
+                    	</h:outputLink>
+                    </li>
                 </ul>
             </div>
             

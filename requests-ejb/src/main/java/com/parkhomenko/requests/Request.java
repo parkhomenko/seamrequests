@@ -14,13 +14,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Scope;
 import org.jboss.seam.annotations.Name;
 
 @Entity
-@Scope(ScopeType.EVENT)
+@Scope(ScopeType.SESSION)
 @Name("req")
 @Table(name="requests")
 public class Request implements Serializable {
@@ -28,6 +30,7 @@ public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
@@ -58,6 +61,9 @@ public class Request implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "admin")
 	private User admin;
+	
+	@Column(name="finished")
+	private Boolean finished;
 
 	public Long getId() {
 		return id;
@@ -121,5 +127,13 @@ public class Request implements Serializable {
 
 	public void setAdmin(User admin) {
 		this.admin = admin;
+	}
+
+	public Boolean getFinished() {
+		return finished;
+	}
+
+	public void setFinished(Boolean finished) {
+		this.finished = finished;
 	}
 }

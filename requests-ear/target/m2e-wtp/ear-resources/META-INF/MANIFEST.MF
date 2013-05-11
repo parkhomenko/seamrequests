@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: sparkhomenko
-Build-Jdk: 1.7.0_17
+Built-By: Sphinx
+Build-Jdk: 1.7.0_02
 Created-By: Maven Integration for Eclipse
 

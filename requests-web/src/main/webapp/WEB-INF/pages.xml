@@ -1,16 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pages xmlns="http://jboss.org/schema/seam/pages"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://jboss.org/schema/seam/pages http://jboss.org/schema/seam/pages-2.3.xsd"
-       
-       login-view-id="/login.xhtml">
-       
-    <!--
+<pages login-view-id="/login.xhtml"
+ xmlns="http://jboss.org/schema/seam/pages"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.org/schema/seam/pages http://jboss.org/schema/seam/pages-2.3.xsd">
+ <!--
 		<page view-id="/first.xhtml">
 			<begin-conversation join="true" pageflow="numberGuess"/>
 		</page>
 	-->
-    
-	<page view-id="/test.xhtml" login-required="true" />
-	   
+	
+ <page login-required="true" view-id="/requests.xhtml" />
+ 
+ <page login-required="true" view-id="/accept_request.xhtml">
+  <restrict>#{s:hasRole('admin')}</restrict>
+  <navigation from-action="#{requestManager.accept}">
+   <render view-id="/requests.xhtml"/>
+  </navigation>
+ </page>
+ 
+ <page login-required="true" view-id="/make_request.xhtml">
+  <restrict>#{s:hasRole('user')}</restrict>
+  <navigation from-action="#{requestManager.create}">
+   <render view-id="/requests.xhtml"/>
+  </navigation>
+ </page>
+ 
+ <page login-required="true" view-id="/users.xhtml">
+  <restrict>#{s:hasRole('admin')}</restrict>
+ </page>
+ 
+ <exception class="org.jboss.seam.security.NotLoggedInException">
+  <redirect view-id="/login.xhtml">
+   <message>You must be logged in to perform this action</message>
+  </redirect>
+ </exception>
+ 
+ <exception class="org.jboss.seam.security.AuthorizationException">
+  <redirect view-id="/security_error.xhtml">
+   <message>You do not have the necessary security privileges to perform this action.</message>
+  </redirect>
+ </exception>
+ 
 </pages>

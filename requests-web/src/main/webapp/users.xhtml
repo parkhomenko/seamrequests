@@ -9,10 +9,45 @@
 		<ui:composition template="/template/common.xhtml">
 			<ui:define name="content">
 				<h2>List of users</h2>
+				<h:outputText value="No users have been regestered"
+	  				rendered="#{usersList.rowCount == 0}" />
+				<h:dataTable var="ur" value="#{usersList}" columnClasses="center,none,none,none,none"
+					rendered="#{usersList.rowCount > 0}">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="No" />
+						</f:facet>
+						<h:outputText value="#{rowCounter.row}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Login" />
+						</f:facet>
+						<h:outputText value="#{ur.name}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Firstname" />
+						</f:facet>
+						<h:outputText value="#{ur.firstname}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Lastname" />
+						</f:facet>
+						<h:outputText value="#{ur.lastname}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Email" />
+						</f:facet>
+						<h:outputText value="#{ur.email}" />
+					</h:column>
+				</h:dataTable>
 	  		</ui:define>
 	  		
 	  		<ui:define name="footer">
-	  			<h2>This is page1 Footer</h2>
+	  			<h2>Just a list of users...</h2>
 	  		</ui:define>
   		</ui:composition>
   	</h:body>

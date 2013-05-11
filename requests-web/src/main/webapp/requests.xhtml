@@ -10,22 +10,25 @@
 			<ui:define name="content">
 	  			<f:view>
 	  				<h:form>
-	  					<h2>Request List</h2>
+	  					<h2>Requests List</h2>
+	  					<h:commandLink action="#{requestManager.findRequests}" value="All requests" />&nbsp;&nbsp;&nbsp;
+	  					<h:commandLink action="#{requestManager.currentRequests}" value="Current requests" />
+	  					<br /><br />
 	  					<h:outputText value="No requests have been found at this time"
 	  						rendered="#{requestList.rowCount == 0}" />
-	  					<h:dataTable var="rq" value="#{requestList}"
+	  					<h:dataTable var="rq" value="#{requestList}" columnClasses="center,none,none,none,none,center"
 	  						rendered="#{requestList.rowCount > 0}">
 	  						<h:column>
 	  							<f:facet name="header">
 	  								<h:outputText value="No" />
 	  							</f:facet>
-	  							<h:outputText value="#{rq.rowIndex}" />
+	  							<h:outputText value="#{rowCounter.row}" />
 	  						</h:column>
 	  						<h:column>
 	  							<f:facet name="header">
 	  								<h:outputText value="Name" />
 	  							</f:facet>
-	  							<h:outputText value="#{rq.name}" />
+	  							<h:commandLink value="#{rq.name}" action="#{requestManager.select}" />
 	  						</h:column>
 	  						<h:column>
 	  							<f:facet name="header">
@@ -35,9 +38,33 @@
 	  								<f:convertDateTime type="both" dateStyle="medium" timeStyle="short" />
 	  							</h:outputText>
 	  						</h:column>
+	  						<h:column>
+	  							<f:facet name="header">
+	  								<h:outputText value="Response message" />
+	  							</f:facet>
+	  							<h:outputText value="#{rq.response}" />
+	  						</h:column>
+	  						<h:column>
+	  							<f:facet name="header">
+	  								<h:outputText value="Response date" />
+	  							</f:facet>
+	  							<h:outputText value="#{rq.responseDate}">
+	  								<f:convertDateTime type="both" dateStyle="medium" timeStyle="short" />
+	  							</h:outputText>
+	  						</h:column>
+	  						<h:column>
+	  							<f:facet name="header">
+	  								<h:outputText value="Processed" />
+	  							</f:facet>
+	  							<h:selectBooleanCheckbox value="#{rq.finished}" disabled="true" />
+	  						</h:column>
 	  					</h:dataTable>
 	  					<h3><h:outputText value="#{req.name}" /></h3>
 	  					<div><h:outputText value="#{req.description}" /></div>
+	  					<p>
+	  						<h:commandLink value="Accept" action="accept_request" rendered="#{not empty req.name and not req.finished and identity.hasRole('admin')}" />
+	  						<h:commandLink value="Make a request" action="make_request" rendered="#{identity.hasRole('user')}" />
+	  					</p>
 	  				</h:form>
 	  			</f:view>
 	  		</ui:define>

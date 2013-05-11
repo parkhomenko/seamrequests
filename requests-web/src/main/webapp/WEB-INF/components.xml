@@ -14,6 +14,10 @@
     
     <security:identity authenticate-method="#{authenticator.authenticate}"/>
     
+    <event type="org.jboss.seam.loggedOut">
+ 		<action execute="#{authenticator.logout}"/>
+ 	</event>
+    
     <event type="org.jboss.seam.security.notLoggedIn">
     	<action execute="#{redirect.captureCurrentView}"/>
 	</event>
