@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:s="http://jboss.org/schema/seam/taglib">
+      
+	<h:body>
+		<ui:composition template="/template/common.xhtml">
+			<ui:define name="content">
+				<f:view>
+					<h:form>
+						<h2>New request</h2>
+						<div>
+	  						<s:validateAll>
+	  							<h:panelGrid columns="2">
+	  								Name: <h:inputText value="#{req.name}" required="true" />
+	  								Description: <h:inputText value="#{req.description}" required="true" />
+	  							</h:panelGrid>
+	  						</s:validateAll>
+	  						<h:messages />
+	  						<p>
+	  							<h:commandButton value="Accept" action="#{requestManager.create}" />
+	  							<h:commandButton value="Cancel" action="requests" />
+	  						</p>
+						</div>
+					</h:form>
+				</f:view>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

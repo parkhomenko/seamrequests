@@ -13,6 +13,11 @@ import org.jboss.seam.annotations.Out;
 import org.jboss.seam.security.Credentials;
 import org.jboss.seam.security.Identity;
 
+/**
+ * 
+ * Provides authentication functions
+ *
+ */
 @Stateless
 @Name("authenticator")
 public class AuthenticatorAction implements Authenticator {
@@ -38,6 +43,9 @@ public class AuthenticatorAction implements Authenticator {
 		this.user = user;
 	}
 	
+	/**
+	 * Method is called when user tries to be authorized on the site
+	 */
 	@Override
 	public boolean authenticate() {
 		Session session = (Session)entityManager.getDelegate();
@@ -53,6 +61,9 @@ public class AuthenticatorAction implements Authenticator {
 			return false;
 	}
 	
+	/**
+	 * Method is called after user is logged out
+	 */
 	@Override
 	public void logout() {
 		user = null;

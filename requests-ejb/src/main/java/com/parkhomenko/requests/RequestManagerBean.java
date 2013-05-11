@@ -22,6 +22,11 @@ import org.jboss.seam.annotations.datamodel.DataModelSelection;
 import org.jboss.seam.annotations.Out;
 import org.jboss.seam.annotations.Destroy;
 
+/**
+ * 
+ * Manipulates with user requests
+ *
+ */
 @Stateful
 @Scope(ScopeType.SESSION)
 @Name("requestManager")
@@ -41,6 +46,9 @@ public class RequestManagerBean implements RequestManager {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	/**
+	 * Fills the requests list from the database
+	 */
 	@Override
 	@Factory("requestList")
 	@SuppressWarnings("unchecked")
@@ -48,6 +56,9 @@ public class RequestManagerBean implements RequestManager {
 		Session session = (Session)entityManager.getDelegate();
 		Criteria criteria = session.createCriteria(Request.class)
 				.addOrder(Order.desc("requestDate"));
+		
+		//If currently logged user is not an administrator,
+		//only the request of the current user will be shown
 		if (user.getRole().getName().equals("user")) {
 			criteria.add(Restrictions.eq("sender", user));
 		}
@@ -56,6 +67,9 @@ public class RequestManagerBean implements RequestManager {
 		req = null;
 	}
 	
+	/**
+	 * Fills the requests list only with the non confirmed requests
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public void currentRequests() {
@@ -71,16 +85,25 @@ public class RequestManagerBean implements RequestManager {
 		req = null;
 	}
 	
+	/**
+	 * Selects a current request
+	 */
 	@Override
 	public void select() {
 	}
 	
+	/**
+	 * Removes a current request
+	 */
 	@Override
 	public void delete() {
 		requestList.remove(req);
 		entityManager.remove(req);
 	}
 	
+	/**
+	 * Confirms a current request by an administrator
+	 */
 	@Override
 	public void accept() {
 		req.setResponseDate(new Date());
@@ -89,6 +112,9 @@ public class RequestManagerBean implements RequestManager {
 		entityManager.merge(req);
 	}
 	
+	/**
+	 * Creates a new request by a user
+	 */
 	@Override
 	public void create() {
 		req.setSender(user);
